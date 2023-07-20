@@ -32,11 +32,6 @@ def check_winner(board: list[list[str]]) -> Optional[Player]:
     Returns:
         None if there is no winner, otherwise returns the winning Player.
     """
-    """
-    00 01 02
-    10 11 12
-    20 21 22
-    """
 
     # Check rows:
     for i in range(BOARD_SIZE):
