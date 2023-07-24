@@ -3,6 +3,9 @@ from src.tictactoe_core import is_board_full
 from src.tictactoe_core import Player
 
 
+# TODO: implement test case for is_board_valid
+
+
 def test_check_winner() -> None:
     B1 = [["X", "", ""], ["", "X", "O"], ["O", "", "X"]]
     assert check_winner(B1) == Player.X

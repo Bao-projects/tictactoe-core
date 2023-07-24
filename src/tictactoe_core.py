@@ -12,12 +12,22 @@ class Player(Enum):
     O = "O"
 
 
+def is_board_valid(board: list[list[str]]) -> bool:
+    """
+    Check if a given input board is valid.
+
+    Returns:
+        True if the game board is valid, False otherwise.
+    """
+    # TODO: implement this
+
+
 def is_board_full(board: list[list[str]]) -> bool:
     """
     Check if the game board is full and no other move can be made.
 
     Returns:
-        True if the game board is full, false otherwise.
+        True if the game board is full, False otherwise.
     """
     for i in range(BOARD_SIZE):
         for j in range(BOARD_SIZE):
