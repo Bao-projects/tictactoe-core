@@ -32,21 +32,20 @@ def check_winner(board: list[list[str]]) -> Optional[Player]:
     Returns:
         None if there is no winner, otherwise returns the winning Player.
     """
-
     # Check rows:
     for i in range(BOARD_SIZE):
         if board[i][0] == board[i][1] == board[i][2] != "":
-            return Player(board[i][0])
+            return Player(board[i][0].upper())
 
     # Check cols:
     for j in range(BOARD_SIZE):
         if board[0][j] == board[1][j] == board[2][j] != "":
-            return Player(board[0][j])
+            return Player(board[0][j].upper())
 
     # check diagonals:
     if board[0][0] == board[1][1] == board[2][2] != "":
-        return Player(board[0][0])
+        return Player(board[0][0].upper())
     if board[0][2] == board[1][1] == board[2][0] != "":
-        return Player(board[0][2])
+        return Player(board[0][2].upper())
 
     return None

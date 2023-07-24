@@ -9,7 +9,7 @@ def test_check_winner() -> None:
 
     B2 = [["X", "", ""], ["", "", "O"], ["", "", ""]]
     assert check_winner(B2) == None
-    # Please write a few more test cases.
+
     B3 = [["X", "X", "X"], ["", "", ""], ["O", "O", ""]]
     assert check_winner(B3) == Player.X
 
@@ -33,21 +33,20 @@ def test_check_winner() -> None:
 
 
 def test_is_board_full() -> None:
-    # Please write your test here.
     B1 = [["X", "O", "X"], ["O", "X", "O"], ["O", "X", "O"]]
-    assert is_board_full(B1) is True
+    assert is_board_full(B1)
 
     B2 = [["X", "O", ""], ["O", "", "O"], ["O", "X", "O"]]
-    assert is_board_full(B2) is False
+    assert not is_board_full(B2)
 
     B3 = [["X", "", ""], ["", "O", ""], ["O", "", "X"]]
-    assert is_board_full(B3) is False
+    assert not is_board_full(B3)
 
     B4 = [["X", "O", "X"], ["X", "O", "O"], ["O", "X", "O"]]
-    assert is_board_full(B4) is True
+    assert is_board_full(B4)
 
     B5 = [["O", "O", "X"], ["X", "X", "O"], ["O", "X", "O"]]
-    assert is_board_full(B5) is True
+    assert is_board_full(B5)
 
 
 test_is_board_full()
