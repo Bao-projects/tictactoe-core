@@ -4,7 +4,7 @@ A complete guide to setup your development environment :D
 
 #### Requirements
 
-`python 3.9` or higher
+`python 3.10`
 
 Make sure you also already installed `pip` and `venv` for your Python.
 
