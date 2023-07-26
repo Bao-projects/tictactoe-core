@@ -20,8 +20,21 @@ def is_board_valid(board: list[list[str]]) -> bool:
         True if the game board is valid, False otherwise.
     """
     # TODO: implement this
-
-
+    #check the input should be x/X/o/O only:
+    valid_move = {'x','X', 'o', 'O', ' '}
+    for i in range(BOARD_SIZE):
+        for j in range(BOARD_SIZE):
+            if board[i][j] not in valid_move:
+                return False            
+            
+    #check if the board already have winner:
+    if check_winner(board) is not None:
+        return False
+    
+    #
+    
+    return True
+    
 def is_board_full(board: list[list[str]]) -> bool:
     """
     Check if the game board is full and no other move can be made.
@@ -34,7 +47,6 @@ def is_board_full(board: list[list[str]]) -> bool:
             if board[i][j] == "":
                 return False
     return True
-
 
 def check_winner(board: list[list[str]]) -> Optional[Player]:
     """

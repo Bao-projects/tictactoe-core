@@ -291,3 +291,5 @@ fabric.properties
 .vscode
 
 local_settings.py
+
+.DS_Store
