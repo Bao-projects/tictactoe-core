@@ -11,6 +11,7 @@ class Player(Enum):
     X = "X"
     O = "O"
 
+
 def is_board_full(board: list[list[str]]) -> bool:
     """
     Check if the game board is full and no other move can be made.
@@ -23,6 +24,7 @@ def is_board_full(board: list[list[str]]) -> bool:
             if board[i][j] == "":
                 return False
     return True
+
 
 def check_winner(board: list[list[str]]) -> Optional[Player]:
     """
@@ -48,6 +50,7 @@ def check_winner(board: list[list[str]]) -> Optional[Player]:
 
     return None
 
+
 def is_board_valid(board: list[list[str]]) -> bool:
     """
     Check if a given input board is valid.
@@ -55,35 +58,34 @@ def is_board_valid(board: list[list[str]]) -> bool:
     Returns:
         True if the game board is valid, False otherwise.
     """
-    #check if board has 3x3 dimensions:
-    if len(board)!= BOARD_SIZE:
+    # check if board has 3x3 dimensions:
+    if len(board) != BOARD_SIZE:
         return False
-    for i in range (BOARD_SIZE):
+    for i in range(BOARD_SIZE):
         if len(board[i]) != BOARD_SIZE:
             return False
-        
-    #check the input should be x/X/o/O only:
-    valid_move = {'x','X', 'o', 'O', ''}
+
+    # check the input should be x/X/o/O only:
+    valid_move = {"x", "X", "o", "O", ""}
     for i in range(BOARD_SIZE):
         for j in range(BOARD_SIZE):
             if board[i][j] not in valid_move:
-                return False            
-            
-    #check if the board already have winner:
+                return False
+
+    # check if the board already have winner:
     if check_winner(board) is not None:
         return False
-    
-    #check if number of move is valid and X always go first:
+
+    # check if number of move is valid and X always go first:
     count_X = 0
     count_O = 0
-    for i in range (BOARD_SIZE):
-        for j in range (BOARD_SIZE):
-            if board[i][j] == 'x' or board[i][j] == 'X':
+    for i in range(BOARD_SIZE):
+        for j in range(BOARD_SIZE):
+            if board[i][j] == "x" or board[i][j] == "X":
                 count_X += 1
-            if board[i][j] == 'o' or board[i][j] == 'O':
+            if board[i][j] == "o" or board[i][j] == "O":
                 count_O += 1
     if abs(count_X - count_O) > 1 or (count_O > count_X):
         return False
-    
+
     return True
-    
