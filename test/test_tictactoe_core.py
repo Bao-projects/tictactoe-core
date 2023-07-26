@@ -3,19 +3,17 @@ from src.tictactoe_core import is_board_full
 from src.tictactoe_core import is_board_valid
 from src.tictactoe_core import Player
 
-
-# TODO: implement test case for is_board_valid
 def test_is_board_valid() -> None:
     
     #valid boards:
-    B1 = [["X", "", ""], ["", "X", "O"], ["O", "", "X"]]
-    assert test_is_board_valid(B1)
+    B1 = [["X", "", ""], ["", "X", "O"], ["O", "X", "O"]]
+    assert is_board_valid(B1)
     
     B2 = [["X", "", ""], ["", "", "O"], ["", "", ""]]
-    assert test_is_board_valid(B2)
+    assert is_board_valid(B2)
     
     B3 = [["X", "O", "X"], ["O", "X", "O"], ["", "X", "O"]]
-    assert test_is_board_valid(B3)
+    assert is_board_valid(B3)
     
     #invalid boards:
     B4 = [["X", "", ""], ["", "Y", "O"], ["O", "", "X"]] #invalid input
@@ -30,7 +28,8 @@ def test_is_board_valid() -> None:
     B7 = [["X", "X"], ["O", "O"]]  #invalid size not 3x3
     assert not is_board_valid(B7)
     
-    pass
+    B8 = [["", "", ""], ["", "", "O"], ["","",""]] # O goes first
+    assert not is_board_valid(B8)
 
 def test_check_winner() -> None:
     B1 = [["X", "", ""], ["", "X", "O"], ["O", "", "X"]]
