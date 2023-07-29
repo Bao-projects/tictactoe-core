@@ -15,6 +15,9 @@ def test_is_board_valid() -> None:
     B3 = [["X", "O", "X"], ["O", "X", "O"], ["", "X", "O"]]
     assert is_board_valid(B3)
 
+    B9 = [[" ", "    ", "   "], ["O", " ", ""], ["", "X", ""]]
+    assert is_board_valid(B9)
+
     # invalid boards:
     B4 = [["X", "", ""], ["", "Y", "O"], ["O", "", "X"]]  # invalid input
     assert not is_board_valid(B4)
@@ -22,14 +25,8 @@ def test_is_board_valid() -> None:
     B5 = [["X", "", ""], ["", "X", "O"], ["X", "X", "O"]]  # not by turn
     assert not is_board_valid(B5)
 
-    B6 = [["X", "X", "O"], ["O", "O", "O"], ["X", "X", "X"]]  # both winning
-    assert not is_board_valid(B6)
-
     B7 = [["X", "X"], ["O", "O"]]  # invalid size not 3x3
     assert not is_board_valid(B7)
-
-    B8 = [["", "", ""], ["", "", "O"], ["", "", ""]]  # O goes first
-    assert not is_board_valid(B8)
 
 
 def test_check_winner() -> None:

@@ -66,15 +66,12 @@ def is_board_valid(board: list[list[str]]) -> bool:
             return False
 
     # check the input should be x/X/o/O only:
-    valid_move = {"x", "X", "o", "O", ""}
+    VALID_MOVE = {"x", "X", "o", "O", ""}
+
     for i in range(BOARD_SIZE):
         for j in range(BOARD_SIZE):
-            if board[i][j] not in valid_move:
+            if board[i][j].strip() not in VALID_MOVE:
                 return False
-
-    # check if the board already have winner:
-    if check_winner(board) is not None:
-        return False
 
     # check if number of move is valid and X always go first:
     count_X = 0
@@ -85,7 +82,8 @@ def is_board_valid(board: list[list[str]]) -> bool:
                 count_X += 1
             if board[i][j] == "o" or board[i][j] == "O":
                 count_O += 1
-    if abs(count_X - count_O) > 1 or (count_O > count_X):
+
+    if abs(count_X - count_O) > 1:
         return False
 
     return True
