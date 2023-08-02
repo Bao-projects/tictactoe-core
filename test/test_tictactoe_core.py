@@ -6,27 +6,30 @@ from src.tictactoe_core import Player
 
 def test_is_board_valid() -> None:
     # valid boards:
-    B1 = [["X", "", ""], ["", "X", "O"], ["O", "X", "O"]]
-    assert is_board_valid(B1)
+    board = [["X", "", ""], ["", "X", "O"], ["O", "X", "O"]]
+    assert is_board_valid(board)
 
-    B2 = [["X", "", ""], ["", "", "O"], ["", "", ""]]
-    assert is_board_valid(B2)
+    board = [["X", "", ""], ["", "", "O"], ["", "", ""]]
+    assert is_board_valid(board)
 
-    B3 = [["X", "O", "X"], ["O", "X", "O"], ["", "X", "O"]]
-    assert is_board_valid(B3)
+    board = [["X", "O", "X"], ["O", "X", "O"], ["", "X", "O"]]
+    assert is_board_valid(board)
 
-    B9 = [[" ", "    ", "   "], ["O", " ", ""], ["", "X", ""]]
-    assert is_board_valid(B9)
+    board = [[" ", "    ", "   "], ["O", " ", ""], ["", "X", ""]]
+    assert is_board_valid(board)
+
+    board = [["x", "o", "o"], ["", "", ""], ["", "", ""]]
+    assert is_board_valid(board)
 
     # invalid boards:
-    B4 = [["X", "", ""], ["", "Y", "O"], ["O", "", "X"]]  # invalid input
-    assert not is_board_valid(B4)
+    board = [["X", "", ""], ["", "Y", "O"], ["O", "", "X"]]  # invalid input
+    assert not is_board_valid(board)
 
-    B5 = [["X", "", ""], ["", "X", "O"], ["X", "X", "O"]]  # not by turn
-    assert not is_board_valid(B5)
+    board = [["X", "", ""], ["", "X", "O"], ["X", "X", "O"]]  # not by turn
+    assert not is_board_valid(board)
 
-    B7 = [["X", "X"], ["O", "O"]]  # invalid size not 3x3
-    assert not is_board_valid(B7)
+    board = [["X", "X"], ["O", "O"]]  # invalid size not 3x3
+    assert not is_board_valid(board)
 
 
 def test_check_winner() -> None:

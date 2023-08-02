@@ -73,17 +73,13 @@ def is_board_valid(board: list[list[str]]) -> bool:
             if board[i][j].strip() not in VALID_MOVE:
                 return False
 
-    # check if number of move is valid and X always go first:
-    count_X = 0
-    count_O = 0
+    count_x = 0
+    count_o = 0
     for i in range(BOARD_SIZE):
         for j in range(BOARD_SIZE):
             if board[i][j] == "x" or board[i][j] == "X":
-                count_X += 1
+                count_x += 1
             if board[i][j] == "o" or board[i][j] == "O":
-                count_O += 1
+                count_o += 1
 
-    if abs(count_X - count_O) > 1:
-        return False
-
-    return True
+    return False if abs(count_x - count_o) > 1 else True
