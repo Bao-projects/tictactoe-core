@@ -21,7 +21,7 @@ class BoardStatusResult:
                     "data": {
                         "is_full": self.is_full,
                         "has_winner": self.has_winner,
-                        "winner": self.winner.value,
+                        "winner": self.winner.value if self.winner else None,
                     },
                 }
             ),
