@@ -83,3 +83,9 @@ def is_board_valid(board: list[list[str]]) -> bool:
                 count_o += 1
 
     return False if abs(count_x - count_o) > 1 else True
+
+
+def best_next_move(board: list[list[str]], for_player: Player) -> list[int]:
+    _ = board  # Ignore board param for now
+    _ = for_player  # Ignore player param for now
+    return [0, 0]  # Temporarily return 0,0

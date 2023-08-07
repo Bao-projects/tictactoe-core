@@ -8,6 +8,12 @@ from src.tictactoe_core import Player
 
 
 @dataclass
+class BestNextMoveResult:
+    pass
+    # TODO: Implement this class
+
+
+@dataclass
 class BoardStatusResult:
     is_full: bool
     has_winner: bool
