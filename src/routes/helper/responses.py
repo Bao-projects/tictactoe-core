@@ -9,8 +9,22 @@ from src.tictactoe_core import Player
 
 @dataclass
 class BestNextMoveResult:
-    pass
-    # TODO: Implement this class
+    for_player: Optional[Player]
+    next_move: list[int]
+
+    def to_flask_response(self) -> tuple[Response, int]:
+        return (
+            jsonify(
+                {
+                    "success": True,
+                    "data": {
+                        "for_player": self.for_player,
+                        "next_move": self.next_move,
+                    },
+                }
+            ),
+            200,
+        )
 
 
 @dataclass
