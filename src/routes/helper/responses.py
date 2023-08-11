@@ -9,7 +9,6 @@ from src.tictactoe_core import Player
 
 @dataclass
 class BestNextMoveResult:
-    for_player: Optional[Player]
     next_move: list[int]
 
     def to_flask_response(self) -> tuple[Response, int]:
@@ -18,7 +17,6 @@ class BestNextMoveResult:
                 {
                     "success": True,
                     "data": {
-                        "for_player": self.for_player,
                         "next_move": self.next_move,
                     },
                 }
