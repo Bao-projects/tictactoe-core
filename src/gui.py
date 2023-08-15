@@ -6,6 +6,7 @@ from PyQt6.QtWidgets import QGraphicsScene
 from PyQt6.QtWidgets import QGraphicsView
 from PyQt6.QtWidgets import QMessageBox
 
+from src.tictactoe_core import best_next_move
 from src.tictactoe_core import check_winner
 from src.tictactoe_core import is_board_full
 from src.tictactoe_core import is_board_valid
@@ -19,26 +20,23 @@ class TicTacToe(QGraphicsItem):
         super().__init__()
         self.O = "O"
         self.X = "X"
+        self.player_mark = self.O
+        self.bot_mark = self.X
         self._reset()
 
     def boundingRect(self):
         return QRectF(0, 0, 300, 300)
 
     def select(self, x, y):
-        if self.board[y][x] == EMPTY:
-            self.board[y][x] = self.turn
-            self.turn = self.X if self.turn == self.O else self.O
-
-        if not is_board_valid(self.board):
-            self._show_game_over_dialog("Error", "Something went wrong!")
+        if self.board[y][x] != EMPTY:
             return
 
-        winner = check_winner(self.board)
-        if winner is not None:
-            self._show_game_over_dialog("Game Over", f"{winner.value} wins!")
+        self.board[y][x] = self.player_mark
+        if not self._check_board():
             return
-        if is_board_full(self.board):
-            self._show_game_over_dialog("Game Over", "Tie!")
+
+        self._let_bot_move()
+        if not self._check_board():
             return
 
     def paint(self, painter, option, widget):
@@ -77,7 +75,31 @@ class TicTacToe(QGraphicsItem):
             [EMPTY, EMPTY, EMPTY],
             [EMPTY, EMPTY, EMPTY],
         ]
-        self.turn = self.X
+        self._let_bot_move()
+
+    def _let_bot_move(self) -> None:
+        x, y = best_next_move(self.board, self.bot_mark)
+        print(f"Bot made a move at slot ({x}, {y})")
+
+        if self.board[x][y] != EMPTY:
+            print(f"ERROR: Slot ({x}, {y}) is not empty")
+            return
+        self.board[x][y] = self.bot_mark
+
+    def _check_board(self) -> bool:
+        if not is_board_valid(self.board):
+            self._show_game_over_dialog("Error", "Something went wrong!")
+            return False
+
+        winner = check_winner(self.board)
+        if winner is not None:
+            self._show_game_over_dialog("Game Over", f"{winner.value} wins!")
+            return False
+        if is_board_full(self.board):
+            self._show_game_over_dialog("Game Over", "Tie!")
+            return False
+
+        return True
 
 
 class MainWindow(QGraphicsView):
