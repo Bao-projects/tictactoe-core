@@ -6,6 +6,10 @@ from typing import Optional
 
 BOARD_SIZE = 3
 
+_BOT_WINS_POINT = 1
+_HUMAN_WINS_POINT = -1
+_TIE_POINT = 0
+
 
 class Player(Enum):
     X = "X"
@@ -86,6 +90,50 @@ def is_board_valid(board: list[list[str]]) -> bool:
 
 
 def best_next_move(board: list[list[str]], for_player: Player) -> list[int]:
-    _ = board  # Ignore board param for now
-    _ = for_player  # Ignore player param for now
-    return [0, 0]  # Temporarily return 0,0
+    best_score = _HUMAN_WINS_POINT - 1
+    best_move = [-1, -1]
+
+    for i in range(BOARD_SIZE):
+        for j in range(BOARD_SIZE):
+            if board[i][j].strip():
+                continue
+
+            board[i][j] = for_player.value
+            score = _minimax(board, for_player, False)
+            board[i][j] = ""
+
+            if score > best_score:
+                best_score = score
+                best_move = [i, j]
+
+    return best_move
+
+
+def _minimax(board: list[list[str]], for_player: Player, is_maximizing: bool) -> int:
+    bot_mark = for_player
+    human_mark = Player.X if for_player == Player.O else Player.O
+
+    winner = check_winner(board)
+    if winner == bot_mark:
+        return _BOT_WINS_POINT
+    elif winner == human_mark:
+        return _HUMAN_WINS_POINT
+    elif is_board_full(board):
+        return _TIE_POINT
+
+    best_score = float("-inf" if is_maximizing else "inf")
+    curr_player = bot_mark if is_maximizing else human_mark
+
+    for i in range(BOARD_SIZE):
+        for j in range(BOARD_SIZE):
+            if board[i][j].strip():
+                continue
+
+            board[i][j] = curr_player.value
+            score = _minimax(board, for_player, not is_maximizing)
+            best_score = (
+                max(score, best_score) if is_maximizing else min(score, best_score)
+            )
+            board[i][j] = ""
+
+    return best_score
