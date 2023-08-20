@@ -10,6 +10,7 @@ from src.tictactoe_core import best_next_move
 from src.tictactoe_core import check_winner
 from src.tictactoe_core import is_board_full
 from src.tictactoe_core import is_board_valid
+from src.tictactoe_core import Player
 
 EMPTY = ""
 SIZE = 3
@@ -20,8 +21,8 @@ class TicTacToe(QGraphicsItem):
         super().__init__()
         self.O = "O"
         self.X = "X"
-        self.player_mark = self.O
-        self.bot_mark = self.X
+        self.player_mark = "O"
+        self.bot_mark = "X"
         self._reset()
 
     def boundingRect(self):
@@ -75,10 +76,10 @@ class TicTacToe(QGraphicsItem):
             [EMPTY, EMPTY, EMPTY],
             [EMPTY, EMPTY, EMPTY],
         ]
-        self._let_bot_move()
+        self.board[1][1] = self.bot_mark
 
     def _let_bot_move(self) -> None:
-        x, y = best_next_move(self.board, self.bot_mark)
+        x, y = best_next_move(self.board, Player(self.bot_mark))
         print(f"Bot made a move at slot ({x}, {y})")
 
         if self.board[x][y] != EMPTY:
