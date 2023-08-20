@@ -76,7 +76,7 @@ class TicTacToe(QGraphicsItem):
             [EMPTY, EMPTY, EMPTY],
             [EMPTY, EMPTY, EMPTY],
         ]
-        self._let_bot_move()
+        self.board[1][1] = self.bot_mark
 
     def _let_bot_move(self) -> None:
         x, y = best_next_move(self.board, Player(self.bot_mark))
